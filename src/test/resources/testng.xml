@@ -5,6 +5,7 @@
         <parameter name = "selenium.browser" value="chrome"/>
         <classes>
             <class name="co.inventorsoft.adreviews.tests.LoginTest"/>
+            <class name="co.inventorsoft.adreviews.tests.InvitationSending"/>
         </classes>
     </test>
 

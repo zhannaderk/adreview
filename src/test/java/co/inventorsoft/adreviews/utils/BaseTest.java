@@ -7,6 +7,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
@@ -59,6 +61,7 @@ public abstract class BaseTest {
         }
         return resourceName;
     }
+
 
     /**
      * Prepares {@link WebDriver} instance with timeout and browser window configurations.

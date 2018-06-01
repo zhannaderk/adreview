@@ -1,0 +1,185 @@
+Index: src/test/java/co/inventorsoft/adreviews/pages/Dashboard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/co/inventorsoft/adreviews/pages/Dashboard.java	(date 1527597055000)
++++ src/test/java/co/inventorsoft/adreviews/pages/Dashboard.java	(date 1527597055000)
+@@ -1,107 +1,131 @@
+ package co.inventorsoft.adreviews.pages;
+ 
+-import org.openqa.selenium.By;
++import co.inventorsoft.adreviews.utils.Util;
+ import org.openqa.selenium.WebDriver;
+ import org.openqa.selenium.WebElement;
++import org.openqa.selenium.support.FindBy;
++import org.openqa.selenium.support.PageFactory;
+ import org.openqa.selenium.support.ui.ExpectedConditions;
+ import org.openqa.selenium.support.ui.WebDriverWait;
+ 
+ public class Dashboard {
+ 
+     private WebDriver webDriver;
+-    private By dashboardtitle = By.xpath("//*[@id=\"content\"]/div[1]");
+-    private By invitationstitle = By.cssSelector("#content > div.px-0.px-md-4 > h2");
+-    private By servicereviewtitle = By.cssSelector("#content > div.px-0.px-md-4 > div > h1");
+-    private By integrationtitle = By.cssSelector("#content > div.px-0.px-md-4 > h1");
+-    private By companyprofiletitle = By.cssSelector("#content > div.px-0.px-md-4 > h1");
+-    private By publicprofiletitle = By.className("company-name");
+-
+-    private By dashboard = By.id("dashboard");
+-    private By invitations = By.id("invitations");
+-    private By servicereview = By.id("service-reviews");
+-    private By integration = By.id("integration");
+-    private By companyprofile = By.id("company-profile");
+-    private By publicprofile = By.id("public-page");
+ 
++    @FindBy(id = "dashboard")
++    private WebElement dashboard;
++    @FindBy(id = "invitations")
++    private WebElement invitations;
++    @FindBy(id = "service-reviews")
++    private WebElement servicereviews;
++    @FindBy(id = "integration")
++    private WebElement integration;
++    @FindBy(id = "company-profile")
++    private WebElement companyprofile;
++    @FindBy(id = "public-page")
++    private WebElement publicprofile;
+ 
+-
+-
++    @FindBy (xpath = "//*[@id=\"content\"]/div[1]")
++    private WebElement dashboardheader;
++    @FindBy (css = "#content > div.px-0.px-md-4 > h2")
++    private WebElement invitationsheader;
++    @FindBy (css = "#content > div.px-0.px-md-4 > div > h1")
++    private WebElement servicereviewheader;
++    @FindBy (css = "#content > div.px-0.px-md-4 > h1")
++    private WebElement integrationheader;
++    @FindBy (css = "#content > div.px-0.px-md-4 > h1")
++    private WebElement companyrpofileheder;
++    @FindBy (className = "company-name")
++    private WebElement publicprofileheader;
+ 
+     public Dashboard (WebDriver driver) {
+         this.webDriver = driver;
++        PageFactory.initElements(driver, this);
+     }
+     
+     public boolean isDisplayedDashboardHeader() {
+-        return webDriver.findElement().isDisplayed();
++        return dashboardheader.isDisplayed();
+     }
+ 
+     public boolean isDisplayedInvitationsHeader() {
+-        return webDriver.findElement().isDisplayed();
++        return invitationsheader.isDisplayed();
+     }
+ 
+     public boolean isDisplayedServicereviewHeader() {
+-        return webDriver.findElement().isDisplayed();
+-    }
+-
+-    public boolean isDisplayedIntegrationHeader() {
+-        return webDriver.findElement().isDisplayed();
++        return servicereviewheader.isDisplayed();
+     }
+ 
+     public boolean isDisplayedIntegrationHeader() {
+-        return webDriver.findElement().isDisplayed();
++        return integrationheader.isDisplayed();
++    }
++
++
++    public boolean isDisplayedCompanyProfileHeader() {
++        return companyrpofileheder.isDisplayed();
++    }
++
++    public boolean isDisplayedPublicProfileHeader() {
++        return publicprofile.isDisplayed();
+     }
+-    
+-    public boolean isTitleDisplayed() {
+-        return webDriver.findElement(title).isDisplayed();
++
++    public String getDashboardText() {
++        return dashboard.getText();
+     }
+ 
+-    public String getTitleText() {
+-        WebElement element = webDriver.findElement(title);
+-        return element.getText();
++    public String getInvitationsText() {
++        return invitations.getText();
++    }
++
++    public String getReviewText() {
++        return servicereviews.getText();
++    }
++
++    public String getIntegrationText() {
++        return integration.getText();
++    }
++
++    public String getProfileText() {
++        return companyprofile.getText();
+     }
+ 
+     public void clickDashboard() {
+-        webDriver.findElement(dashboard).click();
++        dashboard.click();
+         WebDriverWait wait = new WebDriverWait(webDriver, 10);
+-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
++        wait.until(ExpectedConditions.visibilityOf(dashboardheader));
+     }
+ 
+     public void clickInvitations() {
+-        webDriver.findElement(invitations).click();
++        invitations.click();
+         WebDriverWait wait = new WebDriverWait(webDriver, 10);
+-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
++        wait.until(ExpectedConditions.visibilityOf(invitationsheader));
+     }
+ 
+     public void clickServiceReview() {
+-        webDriver.findElement(servicereview).click();
+-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
+-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
++        servicereviews.click();
++        Util.wait10SecondsForVisibilityOf(webDriver, servicereviewheader);
+     }
+ 
+ 
+    public void clickIntegration() {
+-        webDriver.findElement(integration).click();
++        integration.click();
+         WebDriverWait wait = new WebDriverWait(webDriver, 10);
+-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
++        wait.until(ExpectedConditions.visibilityOf(integrationheader));
+     }
+ 
+ 
+     public void clickProfile() {
+-        webDriver.findElement(companyprofile).click();
++        companyprofile.click();
+         WebDriverWait wait = new WebDriverWait(webDriver, 10);
+-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
++        wait.until(ExpectedConditions.visibilityOf(companyrpofileheder));
+     }
+ 
+ 
+     public void clickPublicProfile() {
+-        webDriver.findElement(publicprofile).click();
++        publicprofile.click();
+         WebDriverWait wait = new WebDriverWait(webDriver, 10);
+-        wait.until(ExpectedConditions.visibilityOfElementLocated(publicprofile));
++        wait.until(ExpectedConditions.visibilityOf(publicprofileheader));
+     }
+ 
+-    public boolean isDisplayedPublicProfile() {
+-        return webDriver.findElement(publicprofiletitle).isDisplayed();
+-    }
+ }
+ 
+ 

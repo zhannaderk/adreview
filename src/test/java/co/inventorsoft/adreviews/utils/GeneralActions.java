@@ -1,5 +1,6 @@
 package co.inventorsoft.adreviews.utils;
 
+import co.inventorsoft.adreviews.pages.Dashboard;
 import co.inventorsoft.adreviews.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,6 +17,10 @@ public class GeneralActions {
     public GeneralActions(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, 30);
+    }
+
+    public void loginDefault() {
+        login("satelite2042@gmail.com", "maksg123");
     }
 
     /**

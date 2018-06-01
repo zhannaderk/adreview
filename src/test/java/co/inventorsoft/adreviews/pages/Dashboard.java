@@ -1,84 +1,113 @@
 package co.inventorsoft.adreviews.pages;
 
-import org.openqa.selenium.By;
+import co.inventorsoft.adreviews.utils.Util;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class Dashboard {
 
     private WebDriver webDriver;
-    private By header = By.xpath("//*[@id=\"content\"]/div[1]");
-    private By invititem = By.partialLinkText("Invitations");
-    private By title = By.cssSelector("#content > div.px-0.px-md-4 > h1");
-    private By servicitem = By.partialLinkText("Service Reviews");
-    private By itegritem = By.partialLinkText("Integration");
-    private By profileitem = By.partialLinkText("Company Profile");
-    private By publicpritem = By.partialLinkText("Public profile");
-    private By publicprofile = By.className("company-name");
-    private By dashboarditem = By.partialLinkText("Dashboard");
+    private LeftSideBar leftSideBar;
 
+    @FindBy (xpath = "//*[@id=\"content\"]/div[1]")
+    private WebElement dashboardheader;
+    @FindBy (css = "#content > div.px-0.px-md-4 > h2")
+    private WebElement invitationsheader;
+    @FindBy (css = "#content > div.px-0.px-md-4 > div > h1")
+    private WebElement servicereviewheader;
 
+    @FindBy(css = "#content > div.px-0.px-md-4 > h1")
+    private WebElement integrationheader;
 
-    public Dashboard (WebDriver driver) {
+    @FindBy (css = "#content > div.px-0.px-md-4 > h1")
+    private WebElement companyrpofileheder;
+    @FindBy (className = "company-name")
+    private WebElement publicprofileheader;
+
+    public Dashboard (WebDriver driver, LeftSideBar leftSideBar) {
         this.webDriver = driver;
+        this.leftSideBar = leftSideBar;
+        PageFactory.initElements(driver, this);
     }
     
     public boolean isDisplayedDashboardHeader() {
-        return webDriver.findElement(header).isDisplayed();
+
+        return dashboardheader.isDisplayed();
     }
 
-    public boolean isTitleDisplayed() {
-        return webDriver.findElement(title).isDisplayed();
+    public boolean isDisplayedInvitationsHeader() {
+
+        return invitationsheader.isDisplayed();
     }
 
-    public String getTitleText() {
-        WebElement element = webDriver.findElement(title);
-        return element.getText();
+    public boolean isDisplayedServicereviewHeader() {
+
+        return servicereviewheader.isDisplayed();
     }
 
-    public void clickDashboard() {
-        webDriver.findElement(dashboarditem).click();
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
+    public boolean isDisplayedIntegrationHeader() {
+
+        return integrationheader.isDisplayed();
     }
 
-    public void clickInvitations() {
-        webDriver.findElement(invititem).click();
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
+    public boolean isDisplayedCompanyProfileHeader() {
+        return companyrpofileheder.isDisplayed();
     }
 
-    public void clickServiceReview() {
-        webDriver.findElement(servicitem).click();
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
+    public boolean isDisplayedPublicProfileHeader() {
+
+        return publicprofileheader.isDisplayed();
+    }
+
+    public String getDashboardText() {
+        return dashboardheader.getText();
+    }
+
+    public String getInvitationsText() {
+        return invitationsheader.getText();
+    }
+
+    public String getReviewText() {
+        return servicereviewheader.getText();
+    }
+
+    public String getIntegrationText() {
+        return integrationheader.getText();
+    }
+
+    public String getProfileText() {
+        return companyrpofileheder.getText();
+    }
+
+    public LeftSideBar getLeftSideBar() {
+        return leftSideBar;
+    }
+
+    public void waitForDashboard() {
+        Util.wait10SecondsForVisibilityOf(webDriver, dashboardheader);
     }
 
 
-   public void clickIntegration() {
-        webDriver.findElement(itegritem).click();
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
+    public void waitForInvitations() {
+        Util.wait10SecondsForVisibilityOf(webDriver, invitationsheader);
     }
 
-
-    public void clickProfile() {
-        webDriver.findElement(profileitem).click();
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
+    public void waitForServiceReview() {
+        Util.wait10SecondsForVisibilityOf(webDriver, servicereviewheader);
     }
 
-
-    public void clickPublicProfile() {
-        webDriver.findElement(publicpritem).click();
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(publicprofile));
+    public void waitForIntegration() {
+        Util.wait10SecondsForVisibilityOf(webDriver, integrationheader);
     }
 
-    public boolean isDisplayedPublicProfile() {
-        return webDriver.findElement(publicprofile).isDisplayed();
+    public void waitForCompanyProfile() {
+        Util.wait10SecondsForVisibilityOf(webDriver, companyrpofileheder);
+    }
+
+    public void waitForPublicProfile() {
+        Util.wait10SecondsForVisibilityOf(webDriver, publicprofileheader);
     }
 }
 

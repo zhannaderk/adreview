@@ -1,74 +1,84 @@
 package co.inventorsoft.adreviews.tests;
 
 import co.inventorsoft.adreviews.pages.Dashboard;
+import co.inventorsoft.adreviews.pages.LeftSideBar;
+import co.inventorsoft.adreviews.utils.AuthenticatedBaseTest;
 import co.inventorsoft.adreviews.utils.BaseTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
-public class LoginTest extends BaseTest {
+public class LoginTest extends AuthenticatedBaseTest {
 
     private Dashboard dashboard = null;
+    private LeftSideBar leftSideBar = null;
 
     @BeforeClass
     public void init() {
-        dashboard = new Dashboard(driver);
+        leftSideBar = new LeftSideBar(driver);
+        dashboard = new Dashboard(driver, leftSideBar);
     }
 
-    @DataProvider
-    public Object[][] getLoginData() {
-        return new String[][]{
-                {"satelite2042@gmail.com", "maksg123"}
-        };
+    @BeforeMethod
+    public void beforeMethod() {
+        System.out.println("This will execute before every Method");
     }
 
-    @Test(dataProvider = "getLoginData")
-    public void login(String login, String password) {
-        driver.manage().window().fullscreen();
-        actions.login(login, password);
+    @Test(priority = -1)
+    public void loginTest() {
         Assert.assertTrue(dashboard.isDisplayedDashboardHeader(), "Header is not displayed");
-
     }
 
-    @Test(dependsOnMethods = "login")
+    @Test
+    public void checkDashboard() {
+        leftSideBar.clickDashboard();
+        dashboard.waitForDashboard();
+        Assert.assertNotNull (dashboard.getDashboardText(), "Welcome Text is not displayed");
+    }
+
+    @Test
     public void checkInvitations() {
-        dashboard.clickInvitations();
-        Assert.assertTrue(dashboard.isTitleDisplayed(), "Title is not displayed");
-        Assert.assertEquals("Invitations", dashboard.getTitleText(), "Invitations is not displayed");
+        leftSideBar.clickInvitations();
+        dashboard.waitForInvitations();
+        Assert.assertTrue(dashboard.isDisplayedInvitationsHeader(), "Invitaions Header is not displayed");
+        Assert.assertEquals("Invitations", dashboard.getInvitationsText(), "Invitations Text is not displayed");
         }
 
-    @Test(dependsOnMethods = {"login", "checkInvitations"})
-    public void checkDashboard() {
-        dashboard.clickDashboard();
-        Assert.assertTrue(dashboard.isTitleDisplayed(), "Title is not displayed");
-    }
 
-    @Test(dependsOnMethods = "login")
+    @Test
     public void checkServiceReview() {
-        dashboard.clickServiceReview();
-        Assert.assertTrue(dashboard.isTitleDisplayed(), "Title is not displayed");
-        Assert.assertEquals("Service Reviews", dashboard.getTitleText(), "Service Review is not displayed");
+        leftSideBar.clickServiceReview();
+        dashboard.waitForServiceReview();
+        Assert.assertTrue(dashboard.isDisplayedServicereviewHeader(), "Review Header is not displayed");
+        Assert.assertEquals("Service Reviews", dashboard.getReviewText(), "Service Review Text is not displayed");
     }
 
-    @Test(dependsOnMethods = "login")
+    @Test
     public void checkIntegration() {
-        dashboard.clickIntegration();
-        Assert.assertTrue(dashboard.isTitleDisplayed(), "Title is not displayed");
-        Assert.assertEquals("Integration", dashboard.getTitleText(), "Integration is not displayed");
+        leftSideBar.clickIntegration();
+        dashboard.waitForIntegration();
+        Assert.assertTrue(dashboard.isDisplayedIntegrationHeader(), "Integration Header is not displayed");
+        Assert.assertEquals("Integration", dashboard.getIntegrationText(), "Integration Text is not displayed");
     }
 
-    @Test(dependsOnMethods = "login")
+    @Test
     public void checkProfile() {
-        dashboard.clickProfile();
-        Assert.assertTrue(dashboard.isTitleDisplayed(), "Title is not displayed");
-        Assert.assertEquals("Company Profile", dashboard.getTitleText(), "Company Profile is not displayed");
+        leftSideBar.clickProfile();
+        dashboard.waitForCompanyProfile();
+        Assert.assertTrue(dashboard.isDisplayedCompanyProfileHeader(), "Profile Header is not displayed");
+        Assert.assertEquals("Company Profile", dashboard.getProfileText(), "Company Profile Text is not displayed");
     }
-    @Test(dependsOnMethods = "login")
-    public void checkPublicProfile() {
-        Dashboard dashboard = new Dashboard(driver);
-        dashboard.clickPublicProfile();
-        Assert.assertTrue(dashboard.isDisplayedPublicProfile(), "Company title is not displayed");
 
+    @Test(priority = 6)
+    public void checkPublicProfile() {
+        leftSideBar.clickPublicProfile();
+        dashboard.waitForPublicProfile();
+        Assert.assertTrue(dashboard.isDisplayedPublicProfileHeader(), "Public Profile Header is not displayed");
     }
+
+
+
+
 }
