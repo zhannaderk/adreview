@@ -13,8 +13,7 @@ public class Dashboard {
 
     @FindBy (xpath = "//*[@id=\"content\"]/div[1]")
     private WebElement dashboardheader;
-    @FindBy (css = "#content > div.px-0.px-md-4 > h2")
-    private WebElement invitationsheader;
+
     @FindBy (css = "#content > div.px-0.px-md-4 > div > h1")
     private WebElement servicereviewheader;
 
@@ -37,10 +36,7 @@ public class Dashboard {
         return dashboardheader.isDisplayed();
     }
 
-    public boolean isDisplayedInvitationsHeader() {
 
-        return invitationsheader.isDisplayed();
-    }
 
     public boolean isDisplayedServicereviewHeader() {
 
@@ -65,9 +61,6 @@ public class Dashboard {
         return dashboardheader.getText();
     }
 
-    public String getInvitationsText() {
-        return invitationsheader.getText();
-    }
 
     public String getReviewText() {
         return servicereviewheader.getText();
@@ -90,9 +83,7 @@ public class Dashboard {
     }
 
 
-    public void waitForInvitations() {
-        Util.wait10SecondsForVisibilityOf(webDriver, invitationsheader);
-    }
+
 
     public void waitForServiceReview() {
         Util.wait10SecondsForVisibilityOf(webDriver, servicereviewheader);

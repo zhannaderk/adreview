@@ -1,6 +1,7 @@
 package co.inventorsoft.adreviews.tests;
 
 import co.inventorsoft.adreviews.pages.Dashboard;
+import co.inventorsoft.adreviews.pages.Invitations;
 import co.inventorsoft.adreviews.pages.LeftSideBar;
 import co.inventorsoft.adreviews.utils.AuthenticatedBaseTest;
 import co.inventorsoft.adreviews.utils.BaseTest;
@@ -14,11 +15,13 @@ public class LoginTest extends AuthenticatedBaseTest {
 
     private Dashboard dashboard = null;
     private LeftSideBar leftSideBar = null;
+    private Invitations invitations;
 
     @BeforeClass
     public void init() {
         leftSideBar = new LeftSideBar(driver);
         dashboard = new Dashboard(driver, leftSideBar);
+        invitations = new Invitations(driver, leftSideBar);
     }
 
     @BeforeMethod
@@ -41,9 +44,9 @@ public class LoginTest extends AuthenticatedBaseTest {
     @Test
     public void checkInvitations() {
         leftSideBar.clickInvitations();
-        dashboard.waitForInvitations();
-        Assert.assertTrue(dashboard.isDisplayedInvitationsHeader(), "Invitaions Header is not displayed");
-        Assert.assertEquals("Invitations", dashboard.getInvitationsText(), "Invitations Text is not displayed");
+        invitations.waitForInvitations();
+        Assert.assertTrue(invitations.isDisplayedInvitationsHeader(), "Invitaions Header is not displayed");
+        Assert.assertEquals("Invitations", invitations.getInvitationsText(), "Invitations Text is not displayed");
         }
 
 
