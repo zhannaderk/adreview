@@ -13,7 +13,7 @@ public class Invitations {
     private WebElement invitationsheader;
     @FindBy(id = "selectTemplateButton")
     private WebElement selecttemplatelink;
-    @FindBy(className = "modal-content half-gray")
+    @FindBy(xpath = "//*[@id=\"exampleModalCenter\"]/div/div")
     private WebElement selecttemplatemodal;
     @FindBy(id = "sendTest")
     private WebElement sendtestinvitationlink;
