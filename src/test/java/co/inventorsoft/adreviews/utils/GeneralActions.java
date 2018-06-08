@@ -1,9 +1,7 @@
 package co.inventorsoft.adreviews.utils;
 
-import co.inventorsoft.adreviews.pages.Dashboard;
 import co.inventorsoft.adreviews.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -24,12 +22,10 @@ public class GeneralActions {
     }
 
     /**
-     * Logs in to Admin Panel.
-     *
      * @param login
      * @param password
      */
-        public void login(String login, String password) {
+    public void login(String login, String password) {
         LoginPage LoginPage = new LoginPage(driver);
         LoginPage.open();
         LoginPage.fillEmailInput(login);

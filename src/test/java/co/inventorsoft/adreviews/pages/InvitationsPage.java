@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Invitations {
+public class InvitationsPage {
 
     private WebDriver webDriver;
     @FindBy (css = "#content > div.px-0.px-md-4 > h2")
@@ -18,7 +18,7 @@ public class Invitations {
     @FindBy(id = "sendTest")
     private WebElement sendtestinvitationlink;
 
-    public Invitations(WebDriver driver, LeftSideBar leftSideBar) {
+    public InvitationsPage(WebDriver driver, LeftSideBar leftSideBar) {
         this.webDriver = driver;
         PageFactory.initElements(driver, this);
     }

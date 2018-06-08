@@ -32,15 +32,15 @@ public abstract class BaseTest {
             case "firefox":
                 System.setProperty(
                         "webdriver.gecko.driver",
-                        getResource("/geckodriver.exe"));
+                        getResource("/geckodriver"));
                 return new FirefoxDriver();
-            case "ie":
-            case "internet explorer":
-                System.setProperty(
-                        "webdriver.ie.driver",
-                        getResource("/IEDriverServer.exe"));
-                return new InternetExplorerDriver();
-            case "chrome":
+//            case "ie":
+//            case "internet explorer":
+//                System.setProperty(
+//                        "webdriver.ie.driver",
+//                        getResource("/IEDriverServer.exe"));
+//                return new InternetExplorerDriver();
+//            case "chrome":
             default:
                 System.setProperty(
                         "webdriver.chrome.driver",
@@ -79,7 +79,7 @@ public abstract class BaseTest {
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-
+        driver.manage().window().fullscreen();
         actions = new GeneralActions(driver);
     }
 
