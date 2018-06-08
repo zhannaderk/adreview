@@ -17,9 +17,10 @@ public class NegativeLoginTest extends BaseTest {
     }
 
     @Test
-    public void canNotLoginWithInvalidEmail(){
+    public void canNotLoginWithEmptyEmailField(){
         actions.login("", "maksg123");
         loginfalse.waitForLoginPage();
+       // Assert.assertTrue(loginfalse.errorInvalidEmailInputIsDisplayed);
         Assert.assertTrue(loginfalse.signInButtonIsDisplayed(), "Sign in button is not displayed");
     }
 }

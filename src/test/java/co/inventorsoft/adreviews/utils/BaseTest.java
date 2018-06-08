@@ -5,10 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
@@ -71,9 +68,10 @@ public abstract class BaseTest {
      *
      */
     @BeforeClass
+    @Parameters("browser")
     // TODO use parameters from pom.xml to pass required browser type
-    public void setUp() {
-        driver = new EventFiringWebDriver(getDriver("chrome"));
+    public void setUp(String browser) {
+        driver = new EventFiringWebDriver(getDriver(browser));
 //        driver.register(new EventHandler());
 
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);

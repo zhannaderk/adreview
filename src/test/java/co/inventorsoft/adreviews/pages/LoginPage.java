@@ -50,4 +50,8 @@ public class LoginPage {
 
            loginBtn.click();
        }
+
+//       public boolean errorInvalidEmailInputIsDisplayed() {
+//
+//       }
    }
